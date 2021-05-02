@@ -1,4 +1,4 @@
-# passwordgenerator
+# Password Generator
 
 
 # Purpose 
