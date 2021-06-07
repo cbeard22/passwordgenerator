@@ -7,7 +7,7 @@ let character = ["\'", "!", "#", "$", "%", "'", "(", ")", "*", "+", "-", ".", "/
 
 let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
-let chosen = "";
+let chosen =[];
 
 let generateBtn = document.querySelector("#generate");
 
@@ -24,7 +24,6 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
-  let result = "";
   //asks how long password should be
   let length = prompt("How many characters long should I make your password? (must be between 8 and 128)");
   if (isNaN(length)) {
@@ -37,37 +36,41 @@ function generatePassword() {
     return generatePassword();
   }
   //confirms what characters, letters, and numbers should be included in the password
+
   let beUpper = confirm("Should I include uppercase letters?");
   let beLower = confirm("Should I include lowercase letters?");
   let beNumber = confirm("Should I include numbers?");
   let beCharacter = confirm("Should I include special characters?");
+
 
   //if none of the types are selected then return to the beginning and start over
   if (!beUpper && !beLower && !beNumber && !beCharacter) {
     alert("You need to choose atleast 1 type to include!");
     return generatePassword();
   }
-
-  //addes the characters that were selected to the blank array that will be chosen for the password
-  if (beUpper===true) {
-    chosen += upper
+  //second attempt
+  if (beUpper === true) {
+    chosen = chosen.concat(upper)
   }
 
-  if (beLower===true) {
-    chosen += lower
+  if (beLower === true) {
+    chosen = chosen.concat(lower)
   }
-  if (beNumber===true) {
-    chosen += numbers
+  if (beNumber === true) {
+    chosen = chosen.concat(numbers)
   }
+  if (beCharacter === true) {
+    chosen = chosen.concat(character)
+  }
+  
+let password=[];
 
-  if (beCharacter===true) {
-    chosen += character
-  }
-
-  // randomizes the characters chosen and sets it to the length dictated by the user
+  //randomizes the characters chosen and sets it to the length dictated by the user
   for (let i = 0; i < length; i++) {
-    result += chosen.charAt(Math.floor(Math.random()*chosen.length));
+    console.log(password)
+    let randomCharacter = chosen[Math.floor(Math.random() * chosen.length)];
+   password.push(randomCharacter)
   }
-
-  return result;
-}
+  
+  return password.join("");
+};
